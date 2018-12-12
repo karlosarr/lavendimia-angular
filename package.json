@@ -1,0 +1,23 @@
+{
+  "name": "lavendimia-angular",
+  "version": "1.0.0",
+  "description": "Lavendimia ==========",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^5.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karlosarr/lavendimia-angular.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karlosarr/lavendimia-angular/issues"
+  },
+  "homepage": "https://github.com/karlosarr/lavendimia-angular#readme"
+}

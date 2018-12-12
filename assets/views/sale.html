@@ -1,0 +1,33 @@
+<br />
+<form class="ui form stacked red padded segment">
+  <h1 class="ui header large dividing">Ventas</h1>
+  <div class="field">
+    <a class="ui button positive" href="/#/sale/add">
+      <i class="icon plus"></i>Agregar Venta
+    </a>
+  </div>
+  <div class="field">
+    <table id="sale-payment" class="ui celled structured table">
+      <thead>
+        <tr>
+          <th>Folio Venta</th>
+          <th>Clave Cliente</th>
+          <th>Nombre</th>
+          <th>Total</th>
+          <th>Fecha</th>
+          <th>Estatus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="payment in SaleCtrl.payments track by $index">
+          <td>{{::payment.idventa}}</td>
+          <td>{{::payment.idclientes}}</td>
+          <td>{{::payment.nombre}}</td>
+          <td>{{::payment.total}}</td>
+          <td>{{::payment.fecha_registro}}</td>
+          <td>{{::payment.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

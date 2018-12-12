@@ -1,0 +1,125 @@
+<br />
+<form class="ui form stacked red padded segment">
+  <h1 class="ui header large dividing">Ventas Agregar</h1>
+  <div class="field">
+    <h3>Código: {{ SaleAddCtrl.code }}</h3>
+  </div>
+  <div class="field">
+    <label for="cliente"> Clientes </label>
+    <input
+      name="cliente"
+      id="cliente"
+      type="text"
+      placeholder="Escriba un nombre Cliente"
+      autocomplete="off"
+      ng-model="sale.client"
+      ng-disabled="SaleAddCtrl.paymentSection"
+    />
+    <p>RFC: {{ SaleAddCtrl.rfc }}</p>
+  </div>
+  <div class="field">
+    <label for="articulo"> Articulo </label>
+    <input
+      name="articulo"
+      id="articulo"
+      type="text"
+      placeholder="Escribe un articulo"
+      autocomplete="off"
+      ng-model="SaleAddCtrl.itemSelected"
+    />
+  </div>
+  <div class="field">
+    <table id="sale-detail" class="ui celled structured table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Descripción</th>
+          <th>Modelo</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th colspan="2">Importe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in SaleAddCtrl.items track by $index">
+          <td>{{::item.id}}</td>
+          <td>{{::item.descripcion}}</td>
+          <td>{{::item.modelo}}</td>
+          <td>
+            <input
+              ng-blur="SaleAddCtrl.updateQuantity(item.id, $event)"
+              type="number"
+              ng-value="{{::item.cantidad}}"
+              min="1"
+            />
+          </td>
+          <td>{{::item.precio}}</td>
+          <td>{{::item.importe}}</td>
+          <td>
+            <button
+              class="ui button negative"
+              type="button"
+              ng-click="SaleAddCtrl.deleteItem(item.id)"
+            >
+              <i class="icon cancel"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="field">
+    <div class="field">Enganche: $ {{ SaleAddCtrl.initialPayment }}</div>
+    <div class="field">Bonificación Enganche: $ {{ SaleAddCtrl.bonus }}</div>
+    <div class="field">Total: $ {{ SaleAddCtrl.total }}</div>
+  </div>
+  <div class="field">
+    <button
+      class="ui button positive"
+      type="button"
+      ng-click="SaleAddCtrl.nextPage()"
+      ng-if="!SaleAddCtrl.paymentSection && (SaleAddCtrl.idClient > 0 && SaleAddCtrl.items.length > 0)"
+    >
+      <i class="icon play"></i>Siguiente
+    </button>
+  </div>
+  <div class="field" ng-if="SaleAddCtrl.paymentSection">
+    <table id="sale-payment" class="ui celled structured table">
+      <thead>
+        <tr>
+          <th colspan="5">ABONOS MENSUALES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="payment in SaleAddCtrl.payments track by $index">
+          <td>abonos de {{::payment.payments}}</td>
+          <td>$ {{::payment.monthly}}</td>
+          <td>Total a pagar $ {{::payment.total}}</td>
+          <td>Se ahorra $ {{::payment.saving}}</td>
+          <td>
+            <input
+              type="radio"
+              class="month"
+              name="month"
+              ng-value="{{::payment.payments}}"
+              ng-click="SaleAddCtrl.setPayment($event)"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="field" ng-if="SaleAddCtrl.paymentSection">
+    <button
+      class="ui button positive"
+      type="button"
+      ng-if="SaleAddCtrl.paymentsMonthly > 0 && SaleAddCtrl.items.length > 0"
+      ng-click="SaleAddCtrl.saveSale()"
+    >
+      <i class="icon save"></i>Guardar
+    </button>
+    <a href="#/sale" class="ui button negative">
+      <i class="icon erase"></i>Cancelar
+    </a>
+  </div>
+</form>

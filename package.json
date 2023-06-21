@@ -4,7 +4,7 @@
   "description": "Lavendimia ==========",
   "main": "index.js",
   "dependencies": {
-    "eslint": "^5.10.0"
+    "eslint": "^7.0.0"
   },
   "devDependencies": {},
   "scripts": {
